@@ -1,3 +1,6 @@
+/// use for chap01.04
+use std::collections::HashMap;
+
 /// chap01.00 reverse
 pub fn reverse(str: &str) -> String {
     str.chars().rev().collect()
@@ -47,7 +50,22 @@ pub fn convert_sentence() -> Vec<u32> {
 pub fn atomic_symbols() -> bool {
     let sentence = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can";
     let word_length = sentence.split_whitespace().count();
-    println!("{}", word_length);
+
+    let indexes: Vec<usize> = [1, 5, 6, 7, 8, 9, 15, 16, 19]
+        .iter()
+        .map(|s| ((s - 1) as usize))
+        .collect();
+    let hash: HashMap<usize, usize> = (0..word_length)
+        .map(|s| if indexes.contains(&s) { (s, 1) } else { (s, 2) })
+        .collect();
+
+    sentence
+        .split_whitespace()
+        .enumerate()
+        .map(|(idx, word)| (&word[0..hash[&idx]], ((idx + 1) as u32)));
+    println!("{:?}", hash);
+    
+
     true
 }
 
@@ -85,7 +103,7 @@ mod tests {
     }
 
     #[test]
-    fn test_atomic() {
+    fn test_chap01_04_atomic() {
         assert_eq!(true, true);
     }
 }
