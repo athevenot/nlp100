@@ -59,17 +59,11 @@ pub fn atomic_symbols<'a>() -> HashMap<&'a str, u32> {
         .map(|s| if indexes.contains(&s) { (s, 1) } else { (s, 2) })
         .collect();
 
-    let hash2: HashMap<&'a str, u32> = sentence
+    sentence
         .split_whitespace()
         .enumerate()
         .map(|(idx, word)| (&word[0..hash[&idx]], ((idx + 1) as u32)))
-        .collect();
-
-    for (text, num) in &hash2 {
-        println!("{}, {}", text, num);
-    }
-
-    hash2
+        .collect()
 }
 
 fn main() {
