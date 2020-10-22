@@ -66,8 +66,17 @@ pub fn atomic_symbols<'a>() -> HashMap<&'a str, u32> {
         .collect()
 }
 
+/// chap01.05
+/// What the hell are n-grams or bi-grams ?
+///
+#[allow(unused_variables)]
+pub fn chap05() {
+    let sentence = "I am an NLPer";
+}
+
+/// I don't know how to avoid putting a main function in main.rs without too much verbose entry (like include standard library and macros, etc..)
 fn main() {
-    atomic_symbols();
+    println!("Please, use \"cargo test\" to check the results of the tests.");
 }
 
 #[cfg(test)]
@@ -129,5 +138,3 @@ mod tests {
         assert_eq!(periodic_table, atomic_symbols());
     }
 }
-
-
