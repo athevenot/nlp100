@@ -129,3 +129,5 @@ mod tests {
         assert_eq!(periodic_table, atomic_symbols());
     }
 }
+
+
