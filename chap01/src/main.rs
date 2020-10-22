@@ -1,6 +1,3 @@
-/// use for chap01.04
-use std::collections::HashMap;
-
 /// chap01.00 reverse
 pub fn reverse(str: &str) -> String {
     str.chars().rev().collect()
@@ -44,10 +41,12 @@ pub fn convert_sentence() -> Vec<u32> {
         .collect()
 }
 
-///chap01.04
-#[allow(unused_variables)]
+/// chap01.04
+///
+/// use for chap01.04
+use std::collections::HashMap;
 
-pub fn atomic_symbols() -> bool {
+pub fn atomic_symbols<'a>() -> HashMap<&'a str, u32> {
     let sentence = "Hi He Lied Because Boron Could Not Oxidize Fluorine. New Nations Might Also Sign Peace Security Clause. Arthur King Can";
     let word_length = sentence.split_whitespace().count();
 
@@ -55,18 +54,22 @@ pub fn atomic_symbols() -> bool {
         .iter()
         .map(|s| ((s - 1) as usize))
         .collect();
+
     let hash: HashMap<usize, usize> = (0..word_length)
         .map(|s| if indexes.contains(&s) { (s, 1) } else { (s, 2) })
         .collect();
 
-    sentence
+    let hash2: HashMap<&'a str, u32> = sentence
         .split_whitespace()
         .enumerate()
-        .map(|(idx, word)| (&word[0..hash[&idx]], ((idx + 1) as u32)));
-    println!("{:?}", hash);
-    
+        .map(|(idx, word)| (&word[0..hash[&idx]], ((idx + 1) as u32)))
+        .collect();
 
-    true
+    for (text, num) in &hash2 {
+        println!("{}, {}", text, num);
+    }
+
+    hash2
 }
 
 fn main() {
@@ -104,6 +107,31 @@ mod tests {
 
     #[test]
     fn test_chap01_04_atomic() {
-        assert_eq!(true, true);
+        let periodic_table = [
+            ("H", 1),
+            ("He", 2),
+            ("Li", 3),
+            ("Be", 4),
+            ("B", 5),
+            ("C", 6),
+            ("N", 7),
+            ("O", 8),
+            ("F", 9),
+            ("Ne", 10),
+            ("Na", 11),
+            ("Mi", 12),
+            ("Al", 13),
+            ("Si", 14),
+            ("P", 15),
+            ("S", 16),
+            ("Cl", 17),
+            ("Ar", 18),
+            ("K", 19),
+            ("Ca", 20),
+        ]
+        .iter()
+        .cloned()
+        .collect::<HashMap<_, _>>();
+        assert_eq!(periodic_table, atomic_symbols());
     }
 }

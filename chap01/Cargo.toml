@@ -1,6 +1,6 @@
 [package]
 name = "chap01"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["athevenot"]
 edition = "2018"
 description = "Some algorithms for NPL100 training"
